@@ -7,12 +7,18 @@ def get_days_from_today(date_str: str)->int:
     
     Parameters
     ----------
-    datestr : str
+    date_str : str
         Date represented in 'YYYY-MM-dd' format.
     
+    Returns
+    -------
+    days : int
+        Amount of days between current and input dates.
+
     Raises
     ------
-    ValueError: can't parse input date string into datetime object. 
+    ValueError
+        Can't parse input date string into datetime object. 
     """
 
     try:

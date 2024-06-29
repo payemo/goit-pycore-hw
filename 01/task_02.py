@@ -32,15 +32,14 @@ def get_random_ticket_numbers(min_value:int, max_value:int, quantity:int)->list[
         - If the sample size (max_value - min_value) is larger than the population size (quantity).
     """
 
-    if min_value < MIN_VALUE or max_value > MAX_VALUE:
-        raise ValueError(f"Min: {min_value} > {MIN_VALUE} | Max: {max_value} > {MAX_VALUE}")
-    if(quantity < 0 or quantity > (max_value - min_value + 1)):
-        raise ValueError(f"Input parameters are invalid: {min_value} <= {quantity} <= {max_value}")
+    if  min_value < MIN_VALUE or max_value > MAX_VALUE or \
+        quantity < 0 or quantity > (max_value - min_value + 1):
+        raise ValueError("Invalid input parameters.")
 
     # Generate a sequence of range [min_value, max_value] and
     # returns a sorted list of k-th random samples.
     return sorted(random.sample(range(min_value, max_value + 1), quantity))
 
-print(get_random_ticket_numbers(1, 49, 6))
+print(get_random_ticket_numbers(6, 14, 6))
 #print(get_random_ticket_numbers(49, 1, 3)) # raises exception
 #print(get_random_ticket_numbers(-1, 1000, 10)) # raises exception

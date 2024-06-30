@@ -1,18 +1,16 @@
 from datetime import datetime, date
 
-# More about documentation style: https://developer.lsst.io/v/DM-5063/docs/py_docs.html#
-
 def get_days_from_today(date_str: str)->int:
     r"""Returns the difference between input and current dates.
     
     Parameters
     ----------
-    date_str : str
+    date_str
         Date represented in 'YYYY-MM-dd' format.
     
     Returns
     -------
-    days : int
+    days
         Amount of days between current and input dates.
 
     Raises

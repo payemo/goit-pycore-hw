@@ -1,8 +1,5 @@
 import re
 
-REPLACEMENT_PATTERN = r"(?<=[+380])\d{9}}"
-REDUNDANT_SYMBOLS = r"\D"
-
 def normalize_phone(phone_number:str)->str:
     r"""Normalizing input phone number and returns the formatted variant.
 
@@ -11,12 +8,18 @@ def normalize_phone(phone_number:str)->str:
 
     Papameters
     ----------
-    phone_number : str
+    phone_number
         Input phone number.
+
+    Raises
+    ------
+    ValueError
+        Input phone number doesn't match to the following pattern: +380XXXXXXXXX.
+        There must be exact 10 numbers after (including '0') after inetrnational code.
 
     Returns
     -------
-    normalized_phone_number : str
+    normalized_phone_number
         Phone number with the following format: +380\d{9}
     """
 
@@ -45,7 +48,7 @@ raw_numbers = [
     "(050)8889900",
     "38050-111-22-22",
     "38050 111 22 11   ",
-    #"38050 111 22 1   ",
+    #"38050 111 22 1   ", # Error value
 ]
 
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]

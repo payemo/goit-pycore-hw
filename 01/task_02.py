@@ -13,16 +13,16 @@ def get_random_ticket_numbers(min_value:int, max_value:int, quantity:int)->list[
 
     Parameters
     ----------
-    min_value : int
+    min_value
         Minimum generated value.
-    max_value :
+    max_value
         Maximum generated value.
-    quanity:
+    quanity
         Amount of elements that must be generated.
 
     Returns
     -------
-    ticket_numbers : list[int]
+    ticket_numbers
         Sorted list of randomly generated numbers.
 
     Raises

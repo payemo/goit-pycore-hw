@@ -33,7 +33,7 @@ def get_random_ticket_numbers(min_value:int, max_value:int, quantity:int)->list[
     """
 
     if  min_value < MIN_VALUE or max_value > MAX_VALUE or \
-        quantity < 0 or quantity > (max_value - min_value + 1):
+        quantity < 1 or quantity > (max_value - min_value + 1):
         raise ValueError("Invalid input parameters.")
 
     # Generate a sequence of range [min_value, max_value] and

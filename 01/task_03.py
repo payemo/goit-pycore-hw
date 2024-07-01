@@ -1,40 +1,50 @@
 import re
 
 def normalize_phone(phone_number:str)->str:
-    r"""Normalizing input phone number and returns the formatted variant.
-
-    Preceding international number always defined and has the following format: '+380'.
-    All symbols except '+' that is a part of an international number will be removed.
+    r"""Normalizes the input phone number to the format +38XXXXXXXXX.
 
     Papameters
     ----------
     phone_number
-        Input phone number.
-
-    Raises
-    ------
-    ValueError
-        Input phone number doesn't match to the following pattern: +380XXXXXXXXX.
-        There must be exact 10 numbers after (including '0') after inetrnational code.
+        Input phone number in various formats.
 
     Returns
     -------
     normalized_phone_number
-        Phone number with the following format: +380\d{9}
+        Normalized phone number in the format +38XXXXXXXXX.
+
+    Raises
+    ------
+    ValueError
+        If the input phone number doesn't match the expected pattern.
+
     """
 
-    # Remove all non digit characters except '+' (if such exists)
+    # Remove all non-digit characters except '+' if it exists at the beginning
     phone_number = re.sub(r"[^+?\d]", "", phone_number)
 
+    # VARIAN 1.
+    # if phone_number.startswith('+'):
+    #     # If it starts with '+', ensure it follows the pattern +38XXXXXXXXX
+    #     if not re.match(r"^\+380\d{9}$"):
+    #         raise ValueError(f"{phone_number} is invalid.")
+    # else:
+    #     if re.match(r"^380\d{9}$"): # Check for 380XXXXXXXXXX
+    #         phone_number = '+' + phone_number
+    #     elif re.match(r"^\d{10}$"): # Check for 0XXXXXXXXX
+    #         phone_number = '+38' + phone_number
+    #     else:
+    #         raise ValueError(f"{phone_number} is invalid.")
+
+    # VARIANT 2
+    # Check if number starts with `+38` or `38` or `+` followed by exactly 10 digits.
     if not re.match(r"^(?:\+|\+38|38)?\d{10}$", phone_number):
-        # The phone number may start with: '+38' or '38' or '+',
-        # so there must be exact 10 digits not counting the prefix.
         raise ValueError(f"{phone_number} is invalid.")
-    else:
-        if not phone_number.startswith('+'):
-            # Prepending phone number with an appropriate prefix code: '+' | '+38'
-            prefix = '+38' if not phone_number.startswith('38') else '+'
-            phone_number = prefix + phone_number
+    
+    if phone_number.startswith('38'):
+        phone_number = '+' + phone_number
+    elif not phone_number.startswith('+'):
+        phone_number = '+38' + phone_number
     
     return phone_number
 

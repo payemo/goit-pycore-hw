@@ -23,35 +23,28 @@ def total_salary(path: str) -> tuple[int, float]:
         ValueError 
             If there is an issue with file content (e.g., malformed lines or no valid salary data).
     """
-    try:
-        file_path = Path(path)
 
-        if not file_path.exists():
-            raise FileNotFoundError(f"Input file does not exist: {file_path.name}.")
+    file_path = Path(path)
 
-        salaries = []
+    if not file_path.exists():
+        raise FileNotFoundError(f"Input file does not exist: {file_path.name}.")
 
-        with file_path.open(mode='r', encoding='utf-8') as file:
-            for line in file:
-                try:
-                    # Retrieve salary.
-                    salary = int(line.strip().split(',')[1])
-                    salaries.append(salary)
-                except (ValueError, IndexError):
-                    raise ValueError(f"Malformed line: {line.strip()}")
-                
-        if not salaries:
-            raise ValueError("No valid salary data found.")
+    salaries = []
 
-        total = sum(salaries)
-        return total, total / len(salaries) 
-    
-    except FileNotFoundError as fnf_error:
-        print(fnf_error)
-    except PermissionError as perms_error:
-        print(perms_error)
-    except Exception as ex:
-        print(ex)
+    with file_path.open(mode='r', encoding='utf-8') as file:
+        for line in file:
+            try:
+                # Retrieve salary.
+                salary = int(line.strip().split(',')[1])
+                salaries.append(salary)
+            except (ValueError, IndexError):
+                raise ValueError(f"Malformed line: {line.strip()}")
+            
+    if not salaries:
+        raise ValueError("No valid salary data found.")
+
+    total = sum(salaries)
+    return total, total / len(salaries)
     
 def main():
     # Build the path and return it as string in POSIX format.
@@ -63,4 +56,5 @@ def main():
     except Exception as e:
         print(f"Error occurred: {e}")
 
-main()
+if __name__ == '__main__':
+    main()

@@ -22,7 +22,7 @@ def add_contact(args: list, contacts: dict) -> str:
         name, phone = args
 
         if name in contacts:
-            response = input("Would you like to update the existing contact? [yes/no]")
+            response = input("Would you like to update the existing contact? [yes/no]: ").strip().lower()
             if response == 'yes':
                 return change_contact(args, contacts)
 
@@ -51,7 +51,7 @@ def change_contact(args: list, contacts: dict) -> str:
         name, phone = args
 
         if name not in contacts:
-            response = input(f"Contact [{name}] does not exist. Would you like to create a new one? [yes/no]")
+            response = input(f"Contact [{name}] does not exist. Would you like to create a new one? [yes/no]: ").strip().lower()
             if response == 'yes':
                 return add_contact(args, contacts) 
         

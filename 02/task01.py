@@ -52,7 +52,7 @@ def main():
 
     try:
         total, avg = total_salary(path)
-        print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {avg:.2f}")
+        print(f"Total salary: {total}, Average salary: {avg:.2f}")
     except Exception as e:
         print(f"Error occurred: {e}")
 

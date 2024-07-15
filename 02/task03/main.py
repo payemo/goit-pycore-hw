@@ -1,8 +1,6 @@
-import sys
+import argparse
 from pathlib import Path
 from colorama import Fore
-
-CMD = ['-p', '--path']
 
 def walk_dir(path:Path, depth:int = 0):
     """
@@ -53,12 +51,16 @@ def print_dir_info(path:str) -> None:
         print(f"An unexpected error occurred: {e}")
 
 def main():
-    if len(sys.argv) > 1:
-        # Retrieve path to the directory to scan from input arguments.
-        dir_path = sys.argv[1] if not sys.argv[1] in CMD else sys.argv[2]
-        print_dir_info(dir_path)
+    parser = argparse.ArgumentParser(description="Utility for printing directory structure.")
+    parser.add_argument('-p', '--path', type=str, help='Path to the directory which structure will be printed.')
+
+    args = parser.parse_args()
+
+    if args.path:
+        print_dir_info(args.path)
     else:
-        print(f"Invalid input arguments: {sys.argv}")
+        print("Invalid input argument.")
+        
 
 if __name__ == '__main__':
     main()
